@@ -181,13 +181,23 @@
       z-index: 1;
       padding: 7.5rem 0 4.5rem;
     }
+    .hero__intro {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem 1.5rem;
+      margin-bottom: 1.25rem;
+    }
     .hero__logo {
-      width: clamp(7.5rem, 22vw, 11rem);
+      width: clamp(5.5rem, 18vw, 9.5rem);
       height: auto;
-      margin: 0 0 1.35rem;
+      flex-shrink: 0;
       filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.35));
       opacity: 0;
       animation: rise 0.8s ease forwards 0.05s;
+    }
+    .hero__title-block {
+      min-width: 0;
+      flex: 1;
     }
     .eyebrow {
       display: inline-flex;
@@ -198,7 +208,7 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--amber);
-      margin-bottom: 1.1rem;
+      margin: 0 0 0.65rem;
       opacity: 0;
       animation: rise 0.8s ease forwards 0.15s;
     }
@@ -210,10 +220,10 @@
     }
     .hero h1 {
       font-family: var(--font-display);
-      font-size: clamp(3.4rem, 12vw, 6.8rem);
+      font-size: clamp(2.6rem, 8vw, 5.6rem);
       line-height: 0.92;
       letter-spacing: 0.02em;
-      margin: 0 0 1.1rem;
+      margin: 0;
       max-width: 12ch;
       opacity: 0;
       animation: rise 0.85s ease forwards 0.28s;
@@ -534,6 +544,7 @@
     @media (min-width: 720px) {
       .brand__text { display: flex; }
       .nav__links { display: flex; }
+      .hero__intro { gap: 1.75rem; }
       .services__grid { grid-template-columns: repeat(2, 1fr); }
       .steps__grid { grid-template-columns: repeat(3, 1fr); }
       .why__grid { grid-template-columns: repeat(2, 1fr); }
@@ -578,9 +589,13 @@
     <section class="hero" aria-label="Início">
       <div class="hero__glow" aria-hidden="true"></div>
       <div class="wrap hero__content">
-        <img class="hero__logo" src="logo.png" alt="Logo Despachante Sérgio Neto (Biju)" width="176" height="176" />
-        <p class="eyebrow">Cosmópolis · SP</p>
-        <h1>Despachante Sérgio Neto</h1>
+        <div class="hero__intro">
+          <img class="hero__logo" src="logo.png" alt="Logo Despachante Sérgio Neto (Biju)" width="152" height="152" />
+          <div class="hero__title-block">
+            <p class="eyebrow">Cosmópolis · SP</p>
+            <h1>Despachante Sérgio Neto</h1>
+          </div>
+        </div>
         <p class="hero__lead">
           Documentação veicular com atendimento próximo e sem enrolação.
           Transferência, licenciamento, IPVA e mais — do jeito certo, no prazo certo.
