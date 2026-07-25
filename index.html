@@ -141,23 +141,31 @@
       align-items: end;
       color: var(--paper);
       overflow: hidden;
-      background:
-        linear-gradient(180deg, rgba(26, 51, 88, 0.28) 0%, rgba(26, 51, 88, 0.78) 55%, rgba(26, 51, 88, 0.94) 100%),
-        radial-gradient(ellipse 80% 60% at 70% 20%, rgba(232, 163, 23, 0.2), transparent 55%),
-        linear-gradient(135deg, #2a4a78 0%, #1a3358 45%, #1e3a62 100%);
+      background: #12263f;
+    }
+    .hero__photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 65% center;
+      transform: scale(1.08);
+      animation: heroZoom 18s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+    @keyframes heroZoom {
+      from { transform: scale(1.05) translate3d(0, 0, 0); }
+      to { transform: scale(1.14) translate3d(-1.5%, -1%, 0); }
     }
     .hero::before {
       content: "";
       position: absolute;
       inset: 0;
-      background-image:
-        repeating-linear-gradient(
-          -18deg,
-          transparent,
-          transparent 38px,
-          rgba(244, 241, 234, 0.03) 38px,
-          rgba(244, 241, 234, 0.03) 39px
-        );
+      z-index: 1;
+      background:
+        linear-gradient(110deg, rgba(10, 22, 40, 0.92) 0%, rgba(10, 22, 40, 0.78) 42%, rgba(10, 22, 40, 0.45) 70%, rgba(10, 22, 40, 0.7) 100%),
+        linear-gradient(180deg, rgba(10, 22, 40, 0.35) 0%, transparent 40%, rgba(10, 22, 40, 0.9) 100%);
       pointer-events: none;
     }
     .hero__glow {
@@ -167,18 +175,19 @@
       right: -8%;
       top: 10%;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(90, 140, 210, 0.35), transparent 65%);
+      background: radial-gradient(circle, rgba(232, 163, 23, 0.22), transparent 65%);
       filter: blur(8px);
       animation: pulse 7s ease-in-out infinite;
       pointer-events: none;
+      z-index: 1;
     }
     @keyframes pulse {
-      0%, 100% { opacity: 0.55; transform: scale(1); }
-      50% { opacity: 0.9; transform: scale(1.06); }
+      0%, 100% { opacity: 0.45; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.06); }
     }
     .hero__content {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       padding: 7.5rem 0 4.5rem;
     }
     .hero__intro {
@@ -503,6 +512,174 @@
       filter: grayscale(0.25) contrast(1.05);
     }
 
+    /* MOMENTS / GALLERY */
+    .moments {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 5rem 0;
+      overflow: hidden;
+    }
+    .moments .section-label { color: var(--amber); }
+    .moments .section-lead { color: rgba(238, 243, 249, 0.68); }
+    .moments__stage {
+      display: grid;
+      gap: 1rem;
+    }
+    .moments__main {
+      position: relative;
+      min-height: min(62vw, 420px);
+      border: 1px solid var(--line);
+      overflow: hidden;
+      cursor: zoom-in;
+      isolation: isolate;
+    }
+    .moments__main img {
+      width: 100%;
+      height: 100%;
+      min-height: min(62vw, 420px);
+      object-fit: cover;
+      transition: transform 0.7s ease, opacity 0.45s ease;
+    }
+    .moments__main:hover img { transform: scale(1.04); }
+    .moments__main::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 45%, rgba(10, 22, 40, 0.88) 100%);
+      pointer-events: none;
+    }
+    .moments__caption {
+      position: absolute;
+      left: 1.1rem;
+      right: 1.1rem;
+      bottom: 1.1rem;
+      z-index: 2;
+    }
+    .moments__caption strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      letter-spacing: 0.03em;
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+    .moments__caption span {
+      color: rgba(238, 243, 249, 0.78);
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    .moments__hint {
+      position: absolute;
+      top: 0.9rem;
+      right: 0.9rem;
+      z-index: 2;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(232, 163, 23, 0.92);
+      color: var(--ink);
+      padding: 0.4rem 0.65rem;
+    }
+    .moments__thumbs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.55rem;
+    }
+    .moments__thumb {
+      position: relative;
+      border: 2px solid transparent;
+      padding: 0;
+      overflow: hidden;
+      cursor: pointer;
+      aspect-ratio: 1;
+      background: #0d1a2b;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .moments__thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease, filter 0.3s;
+      filter: brightness(0.78);
+    }
+    .moments__thumb:hover { transform: translateY(-2px); }
+    .moments__thumb:hover img,
+    .moments__thumb.is-active img {
+      filter: brightness(1);
+      transform: scale(1.06);
+    }
+    .moments__thumb.is-active {
+      border-color: var(--amber);
+      box-shadow: 0 0 0 1px var(--amber);
+    }
+    .moments__thumb span {
+      position: absolute;
+      left: 0.35rem;
+      right: 0.35rem;
+      bottom: 0.35rem;
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #fff;
+      text-shadow: 0 1px 6px rgba(0,0,0,.7);
+      text-align: left;
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      place-items: center;
+      padding: 1.25rem;
+      background: rgba(8, 14, 24, 0.88);
+      backdrop-filter: blur(8px);
+    }
+    .lightbox.is-open { display: grid; }
+    .lightbox img {
+      max-width: min(96vw, 920px);
+      max-height: 82vh;
+      object-fit: contain;
+      box-shadow: var(--shadow);
+      animation: rise 0.35s ease;
+    }
+    .lightbox__close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 50%;
+      background: var(--amber);
+      color: var(--ink);
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .lightbox__cap {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      font-weight: 600;
+      text-align: center;
+      max-width: 90%;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.is-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* FOOTER */
     .footer {
       background: var(--ink);
@@ -545,6 +722,14 @@
       .brand__text { display: flex; }
       .nav__links { display: flex; }
       .hero__intro { gap: 1.75rem; }
+      .moments__stage { grid-template-columns: 1.5fr 1fr; align-items: stretch; }
+      .moments__main, .moments__main img { min-height: 480px; }
+      .moments__thumbs {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(2, 1fr);
+        gap: 0.75rem;
+      }
+      .moments__thumb span { font-size: 0.78rem; left: 0.55rem; bottom: 0.55rem; }
       .services__grid { grid-template-columns: repeat(2, 1fr); }
       .steps__grid { grid-template-columns: repeat(3, 1fr); }
       .why__grid { grid-template-columns: repeat(2, 1fr); }
@@ -554,6 +739,11 @@
     @media (min-width: 980px) {
       .services__grid { grid-template-columns: repeat(3, 1fr); }
       .why__grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero__photo { animation: none; transform: none; }
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
     }
   </style>
 </head>
@@ -574,8 +764,8 @@
       <nav aria-label="Principal">
         <ul class="nav__links">
           <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#momentos">Momentos</a></li>
           <li><a href="#como-funciona">Como funciona</a></li>
-          <li><a href="#sobre">Diferenciais</a></li>
           <li><a href="#contato">Contato</a></li>
         </ul>
       </nav>
@@ -587,6 +777,7 @@
 
   <main id="topo">
     <section class="hero" aria-label="Início">
+      <img class="hero__photo" src="img/transferencia.jpg" alt="" width="1600" height="1600" fetchpriority="high" />
       <div class="hero__glow" aria-hidden="true"></div>
       <div class="wrap hero__content">
         <div class="hero__intro">
@@ -662,6 +853,61 @@
             <h3>Segunda via e alterações</h3>
             <p>CRLV, troca de endereço, alteração de característica e demais serviços.</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="moments" id="momentos">
+      <div class="wrap">
+        <p class="section-label reveal">Do atendimento ao documento</p>
+        <h2 class="section-title reveal">Momentos que resolvem seu dia</h2>
+        <p class="section-lead reveal">
+          Clique nas fotos para explorar — transferência, licenciamento, atendimento e documentos.
+          Toque na imagem grande para ampliar.
+        </p>
+        <div class="moments__stage reveal">
+          <button type="button" class="moments__main" id="momentsMain" aria-label="Ampliar foto">
+            <img id="momentsMainImg" src="img/transferencia.jpg" alt="Transferência de veículo com atendimento próximo" />
+            <span class="moments__hint">Ampliar</span>
+            <div class="moments__caption">
+              <strong id="momentsTitle">Transferência</strong>
+              <span id="momentsText">Negócio fechado com a documentação certa — sem dor de cabeça depois.</span>
+            </div>
+          </button>
+          <div class="moments__thumbs" role="tablist" aria-label="Galeria de momentos">
+            <button type="button" class="moments__thumb is-active" role="tab" aria-selected="true"
+              data-src="img/transferencia.jpg"
+              data-title="Transferência"
+              data-text="Negócio fechado com a documentação certa — sem dor de cabeça depois."
+              data-alt="Clientes fechando transferência de veículo">
+              <img src="img/transferencia.jpg" alt="" loading="lazy" />
+              <span>Transferência</span>
+            </button>
+            <button type="button" class="moments__thumb" role="tab" aria-selected="false"
+              data-src="img/licenciamento.jpg"
+              data-title="Licenciamento"
+              data-text="Circular tranquilo começa com o licenciamento em dia."
+              data-alt="Clientes com carro e documentação de licenciamento">
+              <img src="img/licenciamento.jpg" alt="" loading="lazy" />
+              <span>Licenciamento</span>
+            </button>
+            <button type="button" class="moments__thumb" role="tab" aria-selected="false"
+              data-src="img/atendimento.jpg"
+              data-title="Atendimento"
+              data-text="Explicamos o processo de perto e liberamos você para seguir o caminho."
+              data-alt="Atendimento com entrega de chave no escritório">
+              <img src="img/atendimento.jpg" alt="" loading="lazy" />
+              <span>Atendimento</span>
+            </button>
+            <button type="button" class="moments__thumb" role="tab" aria-selected="false"
+              data-src="img/documentos.jpg"
+              data-title="Documentos"
+              data-text="Checklist certo evita ida e volta — a gente te orienta antes."
+              data-alt="Organização de documentos veiculares">
+              <img src="img/documentos.jpg" alt="" loading="lazy" />
+              <span>Documentos</span>
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -789,8 +1035,89 @@
     </svg>
   </a>
 
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Foto ampliada" hidden>
+    <button type="button" class="lightbox__close" id="lightboxClose" aria-label="Fechar">×</button>
+    <img id="lightboxImg" src="" alt="" />
+    <p class="lightbox__cap" id="lightboxCap"></p>
+  </div>
+
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    const mainBtn = document.getElementById("momentsMain");
+    const mainImg = document.getElementById("momentsMainImg");
+    const mainTitle = document.getElementById("momentsTitle");
+    const mainText = document.getElementById("momentsText");
+    const thumbs = document.querySelectorAll(".moments__thumb");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const lightboxCap = document.getElementById("lightboxCap");
+    const lightboxClose = document.getElementById("lightboxClose");
+
+    function setMoment(btn) {
+      thumbs.forEach((t) => {
+        t.classList.toggle("is-active", t === btn);
+        t.setAttribute("aria-selected", t === btn ? "true" : "false");
+      });
+      mainImg.style.opacity = "0";
+      setTimeout(() => {
+        mainImg.src = btn.dataset.src;
+        mainImg.alt = btn.dataset.alt || "";
+        mainTitle.textContent = btn.dataset.title;
+        mainText.textContent = btn.dataset.text;
+        mainImg.style.opacity = "1";
+      }, 180);
+    }
+
+    thumbs.forEach((btn) => {
+      btn.addEventListener("click", () => setMoment(btn));
+    });
+
+    // Auto-rotate gallery
+    let autoIdx = 0;
+    const thumbList = Array.from(thumbs);
+    setInterval(() => {
+      if (lightbox.classList.contains("is-open")) return;
+      autoIdx = (autoIdx + 1) % thumbList.length;
+      setMoment(thumbList[autoIdx]);
+    }, 5200);
+
+    function openLightbox() {
+      const active = document.querySelector(".moments__thumb.is-active") || thumbList[0];
+      lightboxImg.src = active.dataset.src;
+      lightboxImg.alt = active.dataset.alt || "";
+      lightboxCap.textContent = active.dataset.title + " — " + active.dataset.text;
+      lightbox.hidden = false;
+      lightbox.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+    }
+    function closeLightbox() {
+      lightbox.classList.remove("is-open");
+      lightbox.hidden = true;
+      document.body.style.overflow = "";
+    }
+    mainBtn.addEventListener("click", openLightbox);
+    lightboxClose.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeLightbox();
+    });
+
+    // Reveal on scroll
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-in");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
   </script>
 </body>
 </html>
