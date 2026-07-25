@@ -62,7 +62,7 @@ add_para(
     italic=True,
     size=10,
 )
-add_para("Site: https://marcelofigueiredo23.github.io/despachante-sergio-neto/", size=10)
+add_para("Site: https://despachantesergioneto.com.br/", size=10)
 add_para("Instagram: @despachante_sergioneto", size=10)
 add_para("Painel: https://business.google.com", size=10)
 doc.add_paragraph()
@@ -74,7 +74,7 @@ items = [
     ("Apelido (só na descrição): ", "Biju"),
     ("Endereço: ", "Av. Éster, 119 — Bela Vista III, Cosmópolis-SP, CEP 13150-000"),
     ("Telefone: ", "(19) 3872-1151"),
-    ("Site: ", "https://marcelofigueiredo23.github.io/despachante-sergio-neto/"),
+    ("Site: ", "https://despachantesergioneto.com.br/"),
     ("Instagram: ", "https://www.instagram.com/despachante_sergioneto/"),
     (
         "Maps: ",
@@ -248,7 +248,7 @@ posts = [
         (
             "Agora temos site!\n"
             "Conheça nossos serviços e fale direto pelo WhatsApp:\n"
-            "🌐 https://marcelofigueiredo23.github.io/despachante-sergio-neto/\n"
+            "🌐 https://despachantesergioneto.com.br/\n"
             "Instagram: @despachante_sergioneto\n"
             "Despachante em Cosmópolis — transferência, licenciamento, IPVA e mais."
         ),

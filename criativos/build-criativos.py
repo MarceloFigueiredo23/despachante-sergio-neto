@@ -19,7 +19,7 @@ EDGE = Path(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe")
 
 WA_LINE = "19 99185-1849 · 19 99791-1339"
 ADDR = "Campo do Kigol · Novo Horizonte, Cosmópolis-SP"
-SITE = "https://marcelofigueiredo23.github.io/despachante-sergio-neto/"
+SITE = "https://despachantesergioneto.com.br/"
 
 POSTS = [
     {
