@@ -13,17 +13,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --ink: #12151a;
-      --ink-soft: #1c222b;
-      --paper: #f4f1ea;
-      --paper-dim: #e8e2d6;
+      --ink: #1a3358;
+      --ink-soft: #23436d;
+      --paper: #eef3f9;
+      --paper-dim: #dce6f2;
       --amber: #e8a317;
       --amber-deep: #c4840a;
       --wa: #25d366;
       --wa-deep: #1da851;
-      --muted: #6b7280;
-      --line: rgba(244, 241, 234, 0.14);
-      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      --muted: #5a6d86;
+      --line: rgba(238, 243, 249, 0.16);
+      --shadow: 0 24px 60px rgba(26, 51, 88, 0.32);
       --radius: 4px;
       --max: 1120px;
       --font-display: "Bebas Neue", Impact, sans-serif;
@@ -55,7 +55,7 @@
       inset: 0 0 auto;
       z-index: 50;
       backdrop-filter: blur(14px);
-      background: rgba(18, 21, 26, 0.72);
+      background: rgba(26, 51, 88, 0.78);
       border-bottom: 1px solid var(--line);
       transition: background 0.3s ease;
     }
@@ -111,9 +111,9 @@
       color: var(--paper);
       overflow: hidden;
       background:
-        linear-gradient(180deg, rgba(18, 21, 26, 0.35) 0%, rgba(18, 21, 26, 0.82) 55%, rgba(18, 21, 26, 0.96) 100%),
-        radial-gradient(ellipse 80% 60% at 70% 20%, rgba(232, 163, 23, 0.22), transparent 55%),
-        linear-gradient(135deg, #1a2330 0%, #0d1014 45%, #241a0a 100%);
+        linear-gradient(180deg, rgba(26, 51, 88, 0.28) 0%, rgba(26, 51, 88, 0.78) 55%, rgba(26, 51, 88, 0.94) 100%),
+        radial-gradient(ellipse 80% 60% at 70% 20%, rgba(232, 163, 23, 0.2), transparent 55%),
+        linear-gradient(135deg, #2a4a78 0%, #1a3358 45%, #1e3a62 100%);
     }
     .hero::before {
       content: "";
@@ -136,7 +136,7 @@
       right: -8%;
       top: 10%;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(232, 163, 23, 0.28), transparent 65%);
+      background: radial-gradient(circle, rgba(90, 140, 210, 0.35), transparent 65%);
       filter: blur(8px);
       animation: pulse 7s ease-in-out infinite;
       pointer-events: none;
@@ -291,13 +291,13 @@
       position: relative;
       padding: 1.5rem 1.35rem 1.4rem;
       background: #fff;
-      border: 1px solid rgba(18, 21, 26, 0.08);
+      border: 1px solid rgba(26, 51, 88, 0.1);
       border-left: 3px solid var(--amber);
       transition: transform 0.25s, box-shadow 0.25s;
     }
     .service:hover {
       transform: translateY(-3px);
-      box-shadow: 0 16px 36px rgba(18, 21, 26, 0.08);
+      box-shadow: 0 16px 36px rgba(26, 51, 88, 0.1);
     }
     .service__num {
       font-family: var(--font-display);
@@ -368,7 +368,7 @@
     .why__item {
       padding: 1.4rem 1.25rem;
       background: rgba(255, 255, 255, 0.65);
-      border: 1px solid rgba(18, 21, 26, 0.07);
+      border: 1px solid rgba(26, 51, 88, 0.1);
     }
     .why__item h3 {
       margin: 0 0 0.4rem;
@@ -407,7 +407,7 @@
     .contact__card {
       padding: 1.6rem 1.4rem;
       border: 1px solid var(--line);
-      background: rgba(18, 21, 26, 0.45);
+      background: rgba(26, 51, 88, 0.4);
     }
     .contact__card h3 {
       margin: 0 0 0.85rem;
@@ -443,7 +443,7 @@
     .map-embed {
       border: 1px solid var(--line);
       min-height: 280px;
-      background: #0d1014;
+      background: #152a48;
       overflow: hidden;
     }
     .map-embed iframe {
