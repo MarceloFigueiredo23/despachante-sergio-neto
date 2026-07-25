@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Despachante Sérgio Neto | Cosmópolis - SP</title>
+  <meta name="description" content="Despachante Sérgio Neto (Biju) em Cosmópolis-SP. Transferência, licenciamento, IPVA, CNH e documentação veicular com atendimento próximo e ágil." />
+  <meta property="og:title" content="Despachante Sérgio Neto | Cosmópolis - SP" />
+  <meta property="og:description" content="Documentação veicular sem dor de cabeça. Atendimento em Cosmópolis-SP." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #12151a;
+      --ink-soft: #1c222b;
+      --paper: #f4f1ea;
+      --paper-dim: #e8e2d6;
+      --amber: #e8a317;
+      --amber-deep: #c4840a;
+      --wa: #25d366;
+      --wa-deep: #1da851;
+      --muted: #6b7280;
+      --line: rgba(244, 241, 234, 0.14);
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      --radius: 4px;
+      --max: 1120px;
+      --font-display: "Bebas Neue", Impact, sans-serif;
+      --font-body: "Manrope", system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: 0; background: none; }
+
+    .wrap {
+      width: min(100% - 2rem, var(--max));
+      margin-inline: auto;
+    }
+
+    /* NAV */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(18, 21, 26, 0.72);
+      border-bottom: 1px solid var(--line);
+      transition: background 0.3s ease;
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 4.25rem;
+    }
+    .brand {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      letter-spacing: 0.04em;
+      color: var(--paper);
+      line-height: 1;
+    }
+    .brand span { color: var(--amber); }
+    .nav__links {
+      display: none;
+      gap: 1.5rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav__links a {
+      color: rgba(244, 241, 234, 0.78);
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .nav__links a:hover { color: var(--amber); }
+    .nav__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--wa);
+      color: #062312;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.65rem 1rem;
+      border-radius: 999px;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .nav__cta:hover { background: var(--wa-deep); transform: translateY(-1px); }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      align-items: end;
+      color: var(--paper);
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(18, 21, 26, 0.35) 0%, rgba(18, 21, 26, 0.82) 55%, rgba(18, 21, 26, 0.96) 100%),
+        radial-gradient(ellipse 80% 60% at 70% 20%, rgba(232, 163, 23, 0.22), transparent 55%),
+        linear-gradient(135deg, #1a2330 0%, #0d1014 45%, #241a0a 100%);
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          -18deg,
+          transparent,
+          transparent 38px,
+          rgba(244, 241, 234, 0.03) 38px,
+          rgba(244, 241, 234, 0.03) 39px
+        );
+      pointer-events: none;
+    }
+    .hero__glow {
+      position: absolute;
+      width: 42vw;
+      height: 42vw;
+      right: -8%;
+      top: 10%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232, 163, 23, 0.28), transparent 65%);
+      filter: blur(8px);
+      animation: pulse 7s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.55; transform: scale(1); }
+      50% { opacity: 0.9; transform: scale(1.06); }
+    }
+    .hero__content {
+      position: relative;
+      z-index: 1;
+      padding: 7.5rem 0 4.5rem;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 1.1rem;
+      opacity: 0;
+      animation: rise 0.8s ease forwards 0.15s;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 1.6rem;
+      height: 2px;
+      background: var(--amber);
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3.4rem, 12vw, 6.8rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      margin: 0 0 1.1rem;
+      max-width: 12ch;
+      opacity: 0;
+      animation: rise 0.85s ease forwards 0.28s;
+    }
+    .hero__lead {
+      font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+      max-width: 34rem;
+      color: rgba(244, 241, 234, 0.82);
+      margin: 0 0 2rem;
+      font-weight: 500;
+      opacity: 0;
+      animation: rise 0.85s ease forwards 0.42s;
+    }
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      opacity: 0;
+      animation: rise 0.85s ease forwards 0.55s;
+    }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.95rem 1.35rem;
+      border-radius: var(--radius);
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: transform 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn--wa { background: var(--wa); color: #062312; }
+    .btn--wa:hover { background: var(--wa-deep); }
+    .btn--ghost {
+      border: 1px solid rgba(244, 241, 234, 0.35);
+      color: var(--paper);
+      background: rgba(244, 241, 234, 0.04);
+    }
+    .btn--ghost:hover { border-color: var(--amber); color: var(--amber); }
+    .btn--ink {
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .btn--ink:hover { background: var(--ink-soft); }
+    .btn--amber {
+      background: var(--amber);
+      color: var(--ink);
+    }
+    .btn--amber:hover { background: var(--amber-deep); color: #fff; }
+
+    .hero__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem 2rem;
+      margin-top: 2.75rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line);
+      opacity: 0;
+      animation: rise 0.85s ease forwards 0.7s;
+    }
+    .hero__meta strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      letter-spacing: 0.03em;
+      color: var(--amber);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+    .hero__meta span {
+      font-size: 0.85rem;
+      color: rgba(244, 241, 234, 0.65);
+      font-weight: 500;
+    }
+
+    /* SECTIONS */
+    section { padding: 5rem 0; }
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--amber-deep);
+      margin: 0 0 0.75rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6vw, 3.6rem);
+      letter-spacing: 0.02em;
+      line-height: 0.98;
+      margin: 0 0 0.85rem;
+      max-width: 16ch;
+    }
+    .section-lead {
+      margin: 0 0 2.5rem;
+      max-width: 36rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    /* SERVICES */
+    .services { background: var(--paper); }
+    .services__grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr;
+    }
+    .service {
+      position: relative;
+      padding: 1.5rem 1.35rem 1.4rem;
+      background: #fff;
+      border: 1px solid rgba(18, 21, 26, 0.08);
+      border-left: 3px solid var(--amber);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .service:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px rgba(18, 21, 26, 0.08);
+    }
+    .service__num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: rgba(232, 163, 23, 0.45);
+      line-height: 1;
+      margin-bottom: 0.65rem;
+    }
+    .service h3 {
+      margin: 0 0 0.45rem;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+    .service p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* STEPS */
+    .steps {
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .steps .section-label { color: var(--amber); }
+    .steps .section-lead { color: rgba(244, 241, 234, 0.65); }
+    .steps__grid {
+      display: grid;
+      gap: 1.25rem;
+    }
+    .step {
+      padding: 1.6rem 1.4rem;
+      border: 1px solid var(--line);
+      background: linear-gradient(160deg, rgba(244, 241, 234, 0.05), transparent 70%);
+    }
+    .step__badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 50%;
+      background: var(--amber);
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .step h3 {
+      margin: 0 0 0.45rem;
+      font-size: 1.2rem;
+    }
+    .step p {
+      margin: 0;
+      color: rgba(244, 241, 234, 0.68);
+      font-size: 0.95rem;
+    }
+
+    /* WHY */
+    .why {
+      background:
+        linear-gradient(180deg, var(--paper-dim), var(--paper));
+    }
+    .why__grid {
+      display: grid;
+      gap: 1rem;
+    }
+    .why__item {
+      padding: 1.4rem 1.25rem;
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid rgba(18, 21, 26, 0.07);
+    }
+    .why__item h3 {
+      margin: 0 0 0.4rem;
+      font-size: 1.05rem;
+    }
+    .why__item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* CONTACT */
+    .contact {
+      background: var(--ink-soft);
+      color: var(--paper);
+      position: relative;
+      overflow: hidden;
+    }
+    .contact::before {
+      content: "";
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      right: 0;
+      top: 0;
+      background: radial-gradient(ellipse at 80% 40%, rgba(232, 163, 23, 0.18), transparent 60%);
+      pointer-events: none;
+    }
+    .contact .section-label { color: var(--amber); }
+    .contact .section-lead { color: rgba(244, 241, 234, 0.68); }
+    .contact__grid {
+      position: relative;
+      display: grid;
+      gap: 1.5rem;
+    }
+    .contact__card {
+      padding: 1.6rem 1.4rem;
+      border: 1px solid var(--line);
+      background: rgba(18, 21, 26, 0.45);
+    }
+    .contact__card h3 {
+      margin: 0 0 0.85rem;
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      letter-spacing: 0.03em;
+      color: var(--amber);
+    }
+    .contact__list {
+      list-style: none;
+      margin: 0 0 1.4rem;
+      padding: 0;
+      display: grid;
+      gap: 0.85rem;
+    }
+    .contact__list li {
+      display: grid;
+      gap: 0.15rem;
+    }
+    .contact__list small {
+      color: rgba(244, 241, 234, 0.5);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+    }
+    .contact__list a,
+    .contact__list span {
+      font-weight: 600;
+      font-size: 1.02rem;
+    }
+    .contact__list a:hover { color: var(--amber); }
+    .map-embed {
+      border: 1px solid var(--line);
+      min-height: 280px;
+      background: #0d1014;
+      overflow: hidden;
+    }
+    .map-embed iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+      border: 0;
+      filter: grayscale(0.25) contrast(1.05);
+    }
+
+    /* FOOTER */
+    .footer {
+      background: var(--ink);
+      color: rgba(244, 241, 234, 0.55);
+      padding: 1.75rem 0;
+      font-size: 0.88rem;
+    }
+    .footer__inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer a:hover { color: var(--amber); }
+
+    /* FLOAT WA */
+    .float-wa {
+      position: fixed;
+      right: 1.1rem;
+      bottom: 1.1rem;
+      z-index: 60;
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 50%;
+      background: var(--wa);
+      color: #062312;
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, background 0.2s;
+    }
+    .float-wa:hover {
+      transform: scale(1.06);
+      background: var(--wa-deep);
+    }
+    .float-wa svg { width: 1.7rem; height: 1.7rem; }
+
+    @media (min-width: 720px) {
+      .nav__links { display: flex; }
+      .services__grid { grid-template-columns: repeat(2, 1fr); }
+      .steps__grid { grid-template-columns: repeat(3, 1fr); }
+      .why__grid { grid-template-columns: repeat(2, 1fr); }
+      .contact__grid { grid-template-columns: 1fr 1.15fr; align-items: stretch; }
+      .map-embed, .map-embed iframe { min-height: 100%; height: 100%; }
+    }
+    @media (min-width: 980px) {
+      .services__grid { grid-template-columns: repeat(3, 1fr); }
+      .why__grid { grid-template-columns: repeat(4, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <!--
+    Contatos — ajuste aqui se precisar:
+    WhatsApp: troque o número em TODOS os links wa.me (formato 55 + DDD + número)
+  -->
+  <header class="nav">
+    <div class="wrap nav__inner">
+      <a class="brand" href="#topo">Sérgio <span>Neto</span></a>
+      <nav aria-label="Principal">
+        <ul class="nav__links">
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#como-funciona">Como funciona</a></li>
+          <li><a href="#sobre">Diferenciais</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+      <a class="nav__cta" href="https://wa.me/551938721151?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20atendimento." target="_blank" rel="noopener">
+        WhatsApp
+      </a>
+    </div>
+  </header>
+
+  <main id="topo">
+    <section class="hero" aria-label="Início">
+      <div class="hero__glow" aria-hidden="true"></div>
+      <div class="wrap hero__content">
+        <p class="eyebrow">Cosmópolis · SP</p>
+        <h1>Despachante Sérgio Neto</h1>
+        <p class="hero__lead">
+          Documentação veicular com atendimento próximo e sem enrolação.
+          Transferência, licenciamento, IPVA e mais — do jeito certo, no prazo certo.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--wa" href="https://wa.me/551938721151?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20atendimento." target="_blank" rel="noopener">
+            Falar no WhatsApp
+          </a>
+          <a class="btn btn--ghost" href="#servicos">Ver serviços</a>
+        </div>
+        <div class="hero__meta">
+          <div>
+            <strong>Biju</strong>
+            <span>Como a cidade conhece</span>
+          </div>
+          <div>
+            <strong>Av. Éster, 119</strong>
+            <span>Bela Vista III · Cosmópolis</span>
+          </div>
+          <div>
+            <strong>(19) 3872-1151</strong>
+            <span>Atendimento por telefone</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="servicos">
+      <div class="wrap">
+        <p class="section-label">O que resolvemos</p>
+        <h2 class="section-title">Serviços de despachante</h2>
+        <p class="section-lead">
+          Do dia a dia do veículo aos processos mais chatos no DETRAN —
+          a gente organiza a documentação e te orienta em cada etapa.
+        </p>
+        <div class="services__grid">
+          <article class="service">
+            <div class="service__num">01</div>
+            <h3>Transferência de veículo</h3>
+            <p>Compra e venda com documentação em dia, sem surpresa na hora de regularizar.</p>
+          </article>
+          <article class="service">
+            <div class="service__num">02</div>
+            <h3>Licenciamento anual</h3>
+            <p>Emitimos e acompanhamos o licenciamento para você circular tranquilamente.</p>
+          </article>
+          <article class="service">
+            <div class="service__num">03</div>
+            <h3>IPVA e débitos</h3>
+            <p>Consulta, orientação e regularização de débitos vinculados ao veículo.</p>
+          </article>
+          <article class="service">
+            <div class="service__num">04</div>
+            <h3>Primeiro emplacamento</h3>
+            <p>Veículo zero km ou situação especial: emplacamento e documentação inicial.</p>
+          </article>
+          <article class="service">
+            <div class="service__num">05</div>
+            <h3>CNH e processos</h3>
+            <p>Apoio em trâmites relacionados à habilitação e documentação pessoal no trânsito.</p>
+          </article>
+          <article class="service">
+            <div class="service__num">06</div>
+            <h3>Segunda via e alterações</h3>
+            <p>CRLV, troca de endereço, alteração de característica e demais serviços.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="steps" id="como-funciona">
+      <div class="wrap">
+        <p class="section-label">Simples assim</p>
+        <h2 class="section-title">Como funciona</h2>
+        <p class="section-lead">
+          Três passos. Sem burocracia inventada — só o caminho certo para liberar seu documento.
+        </p>
+        <div class="steps__grid">
+          <article class="step">
+            <div class="step__badge">1</div>
+            <h3>Fale conosco</h3>
+            <p>Manda um WhatsApp ou liga. Conta o que precisa e a gente diz o que é necessário.</p>
+          </article>
+          <article class="step">
+            <div class="step__badge">2</div>
+            <h3>Separe os docs</h3>
+            <p>Orientamos a lista certa de documentos. Sem ida e volta por falta de papel.</p>
+          </article>
+          <article class="step">
+            <div class="step__badge">3</div>
+            <h3>Acompanhe o processo</h3>
+            <p>Cuidamos do trâmite e te mantemos informado até a conclusão.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="why" id="sobre">
+      <div class="wrap">
+        <p class="section-label">Por que a gente</p>
+        <h2 class="section-title">Atendimento de quem é da cidade</h2>
+        <p class="section-lead">
+          Despachante de confiança em Cosmópolis — conhecido como Biju —
+          com presença no Google e no Instagram.
+        </p>
+        <div class="why__grid">
+          <article class="why__item">
+            <h3>Atendimento próximo</h3>
+            <p>Explicamos o processo em português claro, sem “juridiquês”.</p>
+          </article>
+          <article class="why__item">
+            <h3>Agilidade no trâmite</h3>
+            <p>Organização e acompanhamento para não deixar o processo parado.</p>
+          </article>
+          <article class="why__item">
+            <h3>Localização fácil</h3>
+            <p>Av. Éster, 119 — Bela Vista III, Cosmópolis-SP.</p>
+          </article>
+          <article class="why__item">
+            <h3>Canal direto</h3>
+            <p>WhatsApp, telefone e Instagram @despachante_sergioneto.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contato">
+      <div class="wrap">
+        <p class="section-label">Fale agora</p>
+        <h2 class="section-title">Vamos resolver sua documentação</h2>
+        <p class="section-lead">
+          Tire dúvida, peça orçamento ou agende. Resposta rápida pelo WhatsApp.
+        </p>
+        <div class="contact__grid">
+          <div class="contact__card">
+            <h3>Contato</h3>
+            <ul class="contact__list">
+              <li>
+                <small>WhatsApp / Telefone</small>
+                <a href="tel:+551938721151">(19) 3872-1151</a>
+              </li>
+              <li>
+                <small>Instagram</small>
+                <a href="https://www.instagram.com/despachante_sergioneto/" target="_blank" rel="noopener">@despachante_sergioneto</a>
+              </li>
+              <li>
+                <small>Endereço</small>
+                <span>Av. Éster, 119 — Bela Vista III<br />Cosmópolis - SP · CEP 13150-000</span>
+              </li>
+              <li>
+                <small>Google Maps</small>
+                <a href="https://www.google.com/maps/place/Sergio+Biju+despachante/@-22.6485522,-47.1855965,17z" target="_blank" rel="noopener">Abrir localização</a>
+              </li>
+            </ul>
+            <div style="display:flex;flex-wrap:wrap;gap:0.75rem;">
+              <a class="btn btn--wa" href="https://wa.me/551938721151?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20atendimento." target="_blank" rel="noopener">Chamar no WhatsApp</a>
+              <a class="btn btn--amber" href="https://www.instagram.com/despachante_sergioneto/" target="_blank" rel="noopener">Ver Instagram</a>
+            </div>
+          </div>
+          <div class="map-embed">
+            <iframe
+              title="Mapa — Despachante Sérgio Neto em Cosmópolis"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Sergio+Biju+despachante+Cosm%C3%B3polis&output=embed">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <p>© <span id="year"></span> Despachante Sérgio Neto · Cosmópolis-SP</p>
+      <p>
+        <a href="https://www.instagram.com/despachante_sergioneto/" target="_blank" rel="noopener">Instagram</a>
+        ·
+        <a href="https://www.google.com/maps/place/Sergio+Biju+despachante/@-22.6485522,-47.1855965,17z" target="_blank" rel="noopener">Google</a>
+      </p>
+    </div>
+  </footer>
+
+  <a class="float-wa" href="https://wa.me/551938721151?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20atendimento." target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
