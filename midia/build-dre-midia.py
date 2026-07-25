@@ -567,6 +567,254 @@ def sheet_breakeven(wb):
     autosize(ws, [34, 16, 16, 16, 16, 16, 22])
 
 
+def projetar_12_meses(orcamento_mensal: float, perfil: str = "realista"):
+    """
+    Projeção 12 meses — Cosmópolis (cidade média/pequena).
+    Combina: base orgânica + demanda paga + sazonalidade + teto de capacidade.
+    """
+    meses = [
+        "M1", "M2", "M3", "M4", "M5", "M6",
+        "M7", "M8", "M9", "M10", "M11", "M12",
+    ]
+    # Sazonalidade despachante/SP (licenciamento no 1º tri, transferências no 2º semestre)
+    sazonalidade = [1.15, 1.20, 1.15, 1.00, 0.95, 0.90, 0.90, 0.95, 1.05, 1.10, 1.05, 0.85]
+
+    # Aprendizado de mídia (CPA relativo; >1 = pior)
+    aprendizado = [1.25, 1.10, 1.00, 0.95, 0.92, 0.90, 0.90, 0.88, 0.88, 0.88, 0.90, 0.95]
+
+    # Orgânico: presença local + Google/Instagram (sem exagerar)
+    if perfil == "conservador":
+        org_base, org_cresc, paid_eficiencia, teto = 8.0, 0.35, 0.75, 32.0
+    elif perfil == "otimista":
+        org_base, org_cresc, paid_eficiencia, teto = 12.0, 0.70, 1.10, 55.0
+    else:  # realista
+        org_base, org_cresc, paid_eficiencia, teto = 10.0, 0.50, 0.92, 42.0
+
+    base_paid = montar_cenario(orcamento_mensal, "base")["vendas"]
+
+    rows = []
+    acum_rec = acum_lucro = acum_midia = 0.0
+    for i, nome in enumerate(meses):
+        saz = sazonalidade[i]
+        apr = aprendizado[i]
+        organico = (org_base + org_cresc * i) * saz
+        pago = (base_paid / apr) * saz * paid_eficiencia
+        # saturação local: após M6, crescimento pago desacelera
+        if i >= 6:
+            pago *= 0.92
+        total = min(organico + pago, teto * saz)
+        # redistribui se bateu teto
+        if organico + pago > total:
+            # mantém proporção
+            fator = total / (organico + pago)
+            organico *= fator
+            pago *= fator
+
+        receita = total * TICKET_MEDIO
+        lucro_serv = total * LUCRO_MEDIO
+        midia = orcamento_mensal
+        lucro_apos = lucro_serv - midia
+        acum_rec += receita
+        acum_lucro += lucro_apos
+        acum_midia += midia
+        rows.append(
+            {
+                "mes": nome,
+                "saz": saz,
+                "organico": organico,
+                "pago": pago,
+                "total": total,
+                "receita": receita,
+                "lucro_servicos": lucro_serv,
+                "midia": midia,
+                "lucro_apos_midia": lucro_apos,
+                "receita_acum": acum_rec,
+                "lucro_acum": acum_lucro,
+                "midia_acum": acum_midia,
+            }
+        )
+    return rows
+
+
+def sheet_projecao_12m(wb):
+    ws = wb.create_sheet("07_Projecao_12_meses")
+    ws["A1"] = "PROJEÇÃO DE FATURAMENTO — 12 MESES (realista de mercado · Cosmópolis-SP)"
+    ws["A1"].font = Font(name="Arial", bold=True, size=14, color="1A3358")
+    ws.merge_cells("A1:L1")
+    ws["A2"] = (
+        "Mercado local (~60–70 mil hab.). Despachante presencial + ads. "
+        "Inclui base orgânica (indicação/Google/Instagram) + tráfego pago + sazonalidade + teto de capacidade."
+    )
+    ws["A2"].font = Font(name="Arial", italic=True, size=9, color="5A6D86")
+    ws.merge_cells("A2:L2")
+
+    # Resumo executivo
+    cenarios = [
+        ("Conservador · R$ 500/mês ads", 500, "conservador"),
+        ("Realista · R$ 500/mês ads", 500, "realista"),
+        ("Realista · R$ 1.000/mês ads", 1000, "realista"),
+        ("Otimista · R$ 1.000/mês ads", 1000, "otimista"),
+    ]
+
+    ws["A4"] = "RESUMO ANUAL"
+    ws["A4"].font = Font(name="Arial", bold=True, size=12, color="1A3358")
+    headers = [
+        "Cenário",
+        "Invest. mídia 12m",
+        "Serviços/ano",
+        "Faturamento 12m",
+        "Lucro bruto serviços",
+        "Lucro após mídia",
+        "ROI mídia 12m",
+        "Média fat./mês",
+        "Média serviços/mês",
+    ]
+    for i, h in enumerate(headers, 1):
+        style_header(ws.cell(5, i, h))
+
+    resumo_rows = []
+    for idx, (nome, inv, perfil) in enumerate(cenarios):
+        rows = projetar_12_meses(inv, perfil)
+        fat = rows[-1]["receita_acum"]
+        midia = rows[-1]["midia_acum"]
+        lucro_m = rows[-1]["lucro_acum"]
+        serv = sum(r["total"] for r in rows)
+        lucro_serv = sum(r["lucro_servicos"] for r in rows)
+        roi = lucro_m / midia if midia else 0
+        rr = 6 + idx
+        ws.cell(rr, 1, nome).font = Font(name="Arial", bold=("Realista" in nome), size=10)
+        style_money(ws.cell(rr, 2, midia))
+        ws.cell(rr, 3, serv).number_format = "0.0"
+        style_money(ws.cell(rr, 4, fat))
+        style_money(ws.cell(rr, 5, lucro_serv))
+        cell = ws.cell(rr, 6, lucro_m)
+        style_money(cell)
+        cell.font = Font(name="Arial", bold=True, color="1A7F37" if lucro_m >= 0 else "B42318", size=10)
+        style_pct(ws.cell(rr, 7, roi))
+        style_money(ws.cell(rr, 8, fat / 12))
+        ws.cell(rr, 9, serv / 12).number_format = "0.0"
+        resumo_rows.append((nome, inv, perfil, rows, fat, lucro_m, serv))
+
+    # Destaque realista
+    ws["A11"] = "LEITURA RECOMENDADA (REALISTA)"
+    ws["A11"].font = Font(name="Arial", bold=True, size=12, color="1A3358")
+    r500 = next(x for x in resumo_rows if x[0].startswith("Realista · R$ 500"))
+    r1000 = next(x for x in resumo_rows if x[0].startswith("Realista · R$ 1.000"))
+    ws["A12"] = (
+        f"Com R$ 500/mês em ads: faturamento projetado ~R$ {r500[4]:,.0f} em 12 meses "
+        f"(~R$ {r500[4]/12:,.0f}/mês) · ~{r500[6]:.0f} serviços no ano."
+    ).replace(",", ".")
+    ws["A12"].font = Font(name="Arial", size=11)
+    ws.merge_cells("A12:I12")
+    ws["A13"] = (
+        f"Com R$ 1.000/mês em ads: faturamento projetado ~R$ {r1000[4]:,.0f} em 12 meses "
+        f"(~R$ {r1000[4]/12:,.0f}/mês) · ~{r1000[6]:.0f} serviços no ano."
+    ).replace(",", ".")
+    ws["A13"].font = Font(name="Arial", size=11)
+    ws.merge_cells("A13:I13")
+    ws["A14"] = (
+        "Faixa realista de mercado para despachante ativo em cidade desse porte, com ads + presença local: "
+        "R$ 90 mil a R$ 180 mil/ano. Acima de R$ 200 mil exige ampliar raio (Artur Nogueira+) ou B2B (lojistas/transportadoras)."
+    )
+    ws["A14"].font = Font(name="Arial", italic=True, size=10, color="5A6D86")
+    ws.merge_cells("A14:I14")
+
+    # Detalhe mensal — realista 500 e 1000
+    r = 16
+    for titulo, inv, perfil in [
+        ("DETALHE MENSAL — REALISTA · R$ 500/mês", 500, "realista"),
+        ("DETALHE MENSAL — REALISTA · R$ 1.000/mês", 1000, "realista"),
+    ]:
+        ws.cell(r, 1, titulo).font = Font(name="Arial", bold=True, size=12, color="1A3358")
+        r += 1
+        headers_m = [
+            "Mês",
+            "Sazonalidade",
+            "Serv. orgânicos",
+            "Serv. pagos",
+            "Serv. totais",
+            "Faturamento",
+            "Lucro serviços",
+            "Invest. mídia",
+            "Lucro após mídia",
+            "Fat. acumulado",
+            "Lucro acum. após mídia",
+        ]
+        for i, h in enumerate(headers_m, 1):
+            style_header(ws.cell(r, i, h), "C4840A")
+        start_data = r + 1
+        rows = projetar_12_meses(inv, perfil)
+        for j, row in enumerate(rows):
+            rr = start_data + j
+            ws.cell(rr, 1, row["mes"]).font = Font(name="Arial", size=10)
+            style_pct(ws.cell(rr, 2, row["saz"] - 1))  # show as variation? better show multiplier
+            ws.cell(rr, 2, row["saz"]).number_format = "0.00"
+            ws.cell(rr, 2).font = Font(name="Arial", size=10)
+            for col, key in [(3, "organico"), (4, "pago"), (5, "total")]:
+                ws.cell(rr, col, row[key]).number_format = "0.0"
+                ws.cell(rr, col).font = Font(name="Arial", size=10)
+            for col, key in [
+                (6, "receita"),
+                (7, "lucro_servicos"),
+                (8, "midia"),
+                (9, "lucro_apos_midia"),
+                (10, "receita_acum"),
+                (11, "lucro_acum"),
+            ]:
+                style_money(ws.cell(rr, col, row[key]))
+            if row["lucro_apos_midia"] < 0:
+                ws.cell(rr, 9).font = Font(name="Arial", color="B42318", size=10)
+        end_data = start_data + 11
+
+        # totals
+        rr = end_data + 1
+        ws.cell(rr, 1, "TOTAL 12 MESES").font = Font(name="Arial", bold=True, size=10)
+        ws.cell(rr, 5, sum(x["total"] for x in rows)).number_format = "0.0"
+        ws.cell(rr, 5).font = Font(name="Arial", bold=True, size=10)
+        style_money(ws.cell(rr, 6, rows[-1]["receita_acum"]))
+        ws.cell(rr, 6).font = Font(name="Arial", bold=True, size=10)
+        style_money(ws.cell(rr, 7, sum(x["lucro_servicos"] for x in rows)))
+        style_money(ws.cell(rr, 8, rows[-1]["midia_acum"]))
+        cell = ws.cell(rr, 9, rows[-1]["lucro_acum"])
+        style_money(cell)
+        cell.font = Font(name="Arial", bold=True, color="1A7F37", size=10)
+
+        chart = LineChart()
+        chart.title = f"Faturamento mensal ({titulo.split('·')[-1].strip()})"
+        chart.y_axis.title = "R$"
+        chart.x_axis.title = "Mês"
+        data = Reference(ws, min_col=6, min_row=start_data - 1, max_row=end_data)
+        cats = Reference(ws, min_col=1, min_row=start_data, max_row=end_data)
+        chart.add_data(data, titles_from_data=True)
+        chart.set_categories(cats)
+        chart.width = 16
+        chart.height = 8
+        ws.add_chart(chart, "A" + str(rr + 2))
+
+        r = rr + 14
+
+    # Premissas de mercado
+    ws.cell(r, 1, "PREMISSAS DE MERCADO (por que esses números)").font = Font(
+        name="Arial", bold=True, size=12, color="1A3358"
+    )
+    premissas = [
+        "Cosmópolis tem população limitada: demanda de despachante não escala como capital — por isso há teto de serviços/mês.",
+        f"Ticket médio ponderado usado: R$ {TICKET_MEDIO:.2f} | Lucro bruto médio: R$ {LUCRO_MEDIO:.2f} (mix da aba Premissas).",
+        "Orgânico cresce com Google Meu Negócio, Instagram, indicações e lojistas — não só com ads.",
+        "Sazonalidade: Jan–Mar mais forte (licenciamento); Jun–Jul mais fraco; Set–Nov recupera (transferências); Dez cai.",
+        "Mês 1–2: CPA pior (aprendizado). Depois estabiliza se houver tracking no WhatsApp.",
+        "R$ 1.000/mês não dobra automaticamente o faturamento vs R$ 500 — há saturação de público no raio 15–20 km.",
+        "Upside real (otimista): fechar parcerias com lojistas/transportadoras (B2B) + ampliar raio para Artur Nogueira.",
+        "Risco: não atender rápido no WhatsApp, criativo fraco ou Google Meu Negócio incompleto derruba a conversão pela metade.",
+    ]
+    for p in premissas:
+        r += 1
+        ws.cell(r, 1, "• " + p).font = Font(name="Arial", size=10)
+        ws.merge_cells(start_row=r, start_column=1, end_row=r, end_column=11)
+
+    autosize(ws, [34, 12, 14, 12, 12, 14, 14, 12, 14, 14, 18])
+
+
 def sheet_plano_acao(wb):
     ws = wb.create_sheet("06_Plano_30_dias")
     ws["A1"] = "Plano prático — primeiros 30 dias"
@@ -614,6 +862,21 @@ def main():
     sheet_dre(wb, 1000, "04_DRE_R$1000")
     sheet_breakeven(wb)
     sheet_plano_acao(wb)
+    sheet_projecao_12m(wb)
+
+    # Atualiza capa com faturação 12m
+    ws = wb["00_Resumo"]
+    r500 = projetar_12_meses(500, "realista")
+    r1000 = projetar_12_meses(1000, "realista")
+    ws["A20"] = "FATURAMENTO 12 MESES (realista)"
+    ws["A20"].font = Font(name="Arial", bold=True, size=12, color="1A3358")
+    ws["A21"] = f"R$ 500/mês ads → ~R$ {r500[-1]['receita_acum']:,.0f} no ano (~R$ {r500[-1]['receita_acum']/12:,.0f}/mês)".replace(",", ".")
+    ws["A21"].font = Font(name="Arial", size=11)
+    ws["A22"] = f"R$ 1.000/mês ads → ~R$ {r1000[-1]['receita_acum']:,.0f} no ano (~R$ {r1000[-1]['receita_acum']/12:,.0f}/mês)".replace(",", ".")
+    ws["A22"].font = Font(name="Arial", size=11)
+    ws["A23"] = "Detalhamento mês a mês na aba 07_Projecao_12_meses"
+    ws["A23"].font = Font(name="Arial", italic=True, size=9, color="5A6D86")
+
     OUT.parent.mkdir(parents=True, exist_ok=True)
     wb.save(OUT)
     print("OK", OUT)
@@ -621,6 +884,12 @@ def main():
     for inv in (500, 1000):
         b = montar_cenario(inv, "base")
         print(inv, "vendas", round(b["vendas"], 1), "lucro_midia", round(b["lucro_apos_midia"], 1), "BE", round(b["be_vendas"], 1))
+    for inv, perfil in [(500, "realista"), (1000, "realista"), (500, "conservador"), (1000, "otimista")]:
+        rows = projetar_12_meses(inv, perfil)
+        print(
+            f"12m {perfil} R${inv}: fat={rows[-1]['receita_acum']:.0f} "
+            f"serv={sum(r['total'] for r in rows):.0f} lucro_midia={rows[-1]['lucro_acum']:.0f}"
+        )
 
 
 if __name__ == "__main__":
