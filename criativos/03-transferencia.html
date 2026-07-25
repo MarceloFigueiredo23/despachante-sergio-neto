@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<style>
+  @font-face { font-family: ImpactLocal; src: local('Impact'); }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1080px; overflow: hidden; }
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #eef3f9;
+    background:
+      radial-gradient(ellipse 70% 55% at 85% 15%, rgba(232,163,23,.28), transparent 55%),
+      radial-gradient(ellipse 50% 40% at 10% 90%, rgba(90,140,210,.22), transparent 50%),
+      linear-gradient(145deg, #2a4a78 0%, #1a3358 48%, #12263f 100%);
+    position: relative;
+  }
+  body::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(-18deg, transparent, transparent 42px, rgba(238,243,249,.035) 42px, rgba(238,243,249,.035) 43px);
+  }
+  .frame {
+    position: relative; z-index: 1;
+    width: 1080px; height: 1080px;
+    padding: 64px 68px 56px;
+    display: flex; flex-direction: column;
+  }
+  .top {
+    display: flex; align-items: center; gap: 22px;
+    margin-bottom: 48px;
+  }
+  .logo {
+    width: 148px; height: 148px; border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(232,163,23,.55), 0 18px 40px rgba(0,0,0,.35);
+  }
+  .brand-line {
+    font-size: 22px; font-weight: 700; letter-spacing: .16em;
+    text-transform: uppercase; color: rgba(238,243,249,.7);
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 14px;
+    font-size: 22px; font-weight: 700; letter-spacing: .18em;
+    color: #e8a317; margin-bottom: 22px;
+  }
+  .eyebrow::before { content: ""; width: 42px; height: 3px; background: #e8a317; }
+  h1 {
+    font-family: ImpactLocal, Impact, "Arial Black", sans-serif;
+    font-size: 92px; line-height: .95; letter-spacing: .02em;
+    font-weight: 400; margin-bottom: 28px; max-width: 12ch;
+    text-transform: uppercase;
+  }
+  .body {
+    font-size: 30px; line-height: 1.4; font-weight: 500;
+    color: rgba(238,243,249,.88); max-width: 16ch; margin-bottom: auto;
+  }
+  .footer {
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid rgba(238,243,249,.18);
+    padding-top: 28px; margin-top: 36px;
+  }
+  .cta {
+    display: inline-flex; align-items: center; gap: 14px;
+    background: #25d366; color: #062312;
+    font-weight: 800; font-size: 24px;
+    padding: 18px 28px; border-radius: 999px;
+  }
+  .wa {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: #062312; color: #25d366;
+    display: grid; place-items: center; font-size: 18px; font-weight: 800;
+  }
+  .handle {
+    text-align: right; font-size: 20px; font-weight: 600;
+    color: rgba(238,243,249,.55); letter-spacing: .04em;
+  }
+  .num {
+    position: absolute; right: 48px; top: 220px;
+    font-family: ImpactLocal, Impact, sans-serif;
+    font-size: 220px; line-height: 1; color: rgba(232,163,23,.12);
+    letter-spacing: -.04em; pointer-events: none;
+  }
+</style>
+</head>
+<body>
+  <div class="frame">
+    <div class="num">03</div>
+    <div class="top">
+      <img class="logo" src="file:///C:/Users/marce/OneDrive/%C3%81rea%20de%20Trabalho/despachante-sergio-neto/logo.png" alt="" />
+      <div class="brand-line">Despachante Sérgio Neto · Biju</div>
+    </div>
+    <div class="eyebrow">COMPROU OU VENDEU?</div>
+    <h1>TRANSFERÊNCIA<br>SEM DOR DE CABEÇA</h1>
+    <p class="body">Orientamos os documentos certos e acompanhamos o processo até a regularização.</p>
+    <div class="footer">
+      <div class="cta"><span class="wa">W</span>Fale conosco no WhatsApp</div>
+      <div class="handle">@despachante_sergioneto</div>
+    </div>
+  </div>
+</body>
+</html>
