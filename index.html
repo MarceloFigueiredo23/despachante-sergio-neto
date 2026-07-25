@@ -8,6 +8,9 @@
   <meta property="og:title" content="Despachante Sérgio Neto | Cosmópolis - SP" />
   <meta property="og:description" content="Documentação veicular sem dor de cabeça. Atendimento em Cosmópolis-SP." />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="logo.png" />
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -67,13 +70,41 @@
       min-height: 4.25rem;
     }
     .brand {
-      font-family: var(--font-display);
-      font-size: 1.55rem;
-      letter-spacing: 0.04em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
       color: var(--paper);
-      line-height: 1;
+      line-height: 1.1;
+      min-width: 0;
     }
-    .brand span { color: var(--amber); }
+    .brand__logo {
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #fff;
+      box-shadow: 0 0 0 2px rgba(232, 163, 23, 0.45);
+      flex-shrink: 0;
+    }
+    .brand__text {
+      display: none;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .brand__text strong {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      letter-spacing: 0.04em;
+      font-weight: 400;
+    }
+    .brand__text strong span { color: var(--amber); }
+    .brand__text small {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(238, 243, 249, 0.65);
+    }
     .nav__links {
       display: none;
       gap: 1.5rem;
@@ -149,6 +180,14 @@
       position: relative;
       z-index: 1;
       padding: 7.5rem 0 4.5rem;
+    }
+    .hero__logo {
+      width: clamp(7.5rem, 22vw, 11rem);
+      height: auto;
+      margin: 0 0 1.35rem;
+      filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.35));
+      opacity: 0;
+      animation: rise 0.8s ease forwards 0.05s;
     }
     .eyebrow {
       display: inline-flex;
@@ -493,6 +532,7 @@
     .float-wa svg { width: 1.7rem; height: 1.7rem; }
 
     @media (min-width: 720px) {
+      .brand__text { display: flex; }
       .nav__links { display: flex; }
       .services__grid { grid-template-columns: repeat(2, 1fr); }
       .steps__grid { grid-template-columns: repeat(3, 1fr); }
@@ -509,11 +549,17 @@
 <body>
   <!--
     Contatos — ajuste aqui se precisar:
-    WhatsApp: troque o número em TODOS os links wa.me (formato 55 + DDD + número)
+    WhatsApp oficial: 5519991851849
   -->
   <header class="nav">
     <div class="wrap nav__inner">
-      <a class="brand" href="#topo">Sérgio <span>Neto</span></a>
+      <a class="brand" href="#topo">
+        <img class="brand__logo" src="logo.png" alt="Despachante Sérgio Neto" width="44" height="44" />
+        <span class="brand__text">
+          <strong>Sérgio <span>Neto</span></strong>
+          <small>Despachante</small>
+        </span>
+      </a>
       <nav aria-label="Principal">
         <ul class="nav__links">
           <li><a href="#servicos">Serviços</a></li>
@@ -522,7 +568,7 @@
           <li><a href="#contato">Contato</a></li>
         </ul>
       </nav>
-      <a class="nav__cta" href="https://wa.me/551938721151?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20atendimento." target="_blank" rel="noopener">
+      <a class="nav__cta" href="https://wa.me/5519991851849?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20atendimento." target="_blank" rel="noopener">
         WhatsApp
       </a>
     </div>
@@ -532,6 +578,7 @@
     <section class="hero" aria-label="Início">
       <div class="hero__glow" aria-hidden="true"></div>
       <div class="wrap hero__content">
+        <img class="hero__logo" src="logo.png" alt="Logo Despachante Sérgio Neto (Biju)" width="176" height="176" />
         <p class="eyebrow">Cosmópolis · SP</p>
         <h1>Despachante Sérgio Neto</h1>
         <p class="hero__lead">
@@ -539,7 +586,7 @@
           Transferência, licenciamento, IPVA e mais — do jeito certo, no prazo certo.
         </p>
         <div class="hero__actions">
-          <a class="btn btn--wa" href="https://wa.me/551938721151?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20atendimento." target="_blank" rel="noopener">
+          <a class="btn btn--wa" href="https://wa.me/5519991851849?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20atendimento." target="_blank" rel="noopener">
             Falar no WhatsApp
           </a>
           <a class="btn btn--ghost" href="#servicos">Ver serviços</a>
@@ -554,8 +601,8 @@
             <span>Bela Vista III · Cosmópolis</span>
           </div>
           <div>
-            <strong>(19) 3872-1151</strong>
-            <span>Atendimento por telefone</span>
+            <strong>(19) 99185-1849</strong>
+            <span>WhatsApp</span>
           </div>
         </div>
       </div>
@@ -672,7 +719,11 @@
             <h3>Contato</h3>
             <ul class="contact__list">
               <li>
-                <small>WhatsApp / Telefone</small>
+                <small>WhatsApp</small>
+                <a href="https://wa.me/5519991851849" target="_blank" rel="noopener">(19) 99185-1849</a>
+              </li>
+              <li>
+                <small>Telefone</small>
                 <a href="tel:+551938721151">(19) 3872-1151</a>
               </li>
               <li>
@@ -689,7 +740,7 @@
               </li>
             </ul>
             <div style="display:flex;flex-wrap:wrap;gap:0.75rem;">
-              <a class="btn btn--wa" href="https://wa.me/551938721151?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20atendimento." target="_blank" rel="noopener">Chamar no WhatsApp</a>
+              <a class="btn btn--wa" href="https://wa.me/5519991851849?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20atendimento." target="_blank" rel="noopener">Chamar no WhatsApp</a>
               <a class="btn btn--amber" href="https://www.instagram.com/despachante_sergioneto/" target="_blank" rel="noopener">Ver Instagram</a>
             </div>
           </div>
@@ -717,7 +768,7 @@
     </div>
   </footer>
 
-  <a class="float-wa" href="https://wa.me/551938721151?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20atendimento." target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
+  <a class="float-wa" href="https://wa.me/5519991851849?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20atendimento." target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
     </svg>
