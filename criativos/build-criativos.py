@@ -140,6 +140,8 @@ def html_for(post: dict) -> str:
     font-size: 84px; line-height: .94; letter-spacing: .02em;
     font-weight: 400; margin-bottom: 22px; max-width: 11ch;
     text-transform: uppercase;
+    color: #ffffff;
+    -webkit-text-fill-color: #ffffff;
     text-shadow: 0 4px 22px rgba(0,0,0,.55);
   }}
   .body {{
