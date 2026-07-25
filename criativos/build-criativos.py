@@ -17,6 +17,10 @@ BG = OUT / "bg"
 LOGO = ROOT / "logo.png"
 EDGE = Path(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe")
 
+WA_LINE = "19 99185-1849 · 19 99791-1339"
+ADDR = "Campo do Kigol · Novo Horizonte, Cosmópolis-SP"
+SITE = "https://marcelofigueiredo23.github.io/despachante-sergio-neto/"
+
 POSTS = [
     {
         "slug": "01-site",
@@ -24,14 +28,16 @@ POSTS = [
         "dia": "Dia 1 — publicar hoje",
         "eyebrow": "COSMÓPOLIS · SP",
         "title": "AGORA TEMOS<br>SITE",
-        "body": "Atendimento próximo, documentação em dia e WhatsApp direto. Conheça online e fale com a gente.",
-        "cta": "Link na bio e no Google",
+        "body": "Seu despachante presencial, com a melhor agilidade online. Lojista ou transportadora? Condições especiais.",
+        "cta": WA_LINE,
         "copy": (
             "Agora temos site!\n"
-            "Conheça nossos serviços e fale direto pelo WhatsApp:\n"
-            "🌐 https://marcelofigueiredo23.github.io/despachante-sergio-neto/\n"
-            "Instagram: @despachante_sergioneto\n"
-            "Despachante em Cosmópolis — transferência, licenciamento, IPVA e mais."
+            "O seu despachante presencial, com a melhor agilidade online.\n"
+            f"🌐 {SITE}\n"
+            "📲 WhatsApp: (19) 99185-1849 · (19) 99791-1339\n"
+            "📸 Instagram: @despachante_sergioneto\n"
+            f"📍 {ADDR}\n"
+            "Lojistas e transportadoras: condições especiais."
         ),
     },
     {
@@ -40,13 +46,14 @@ POSTS = [
         "dia": "Dia 4 — daqui 3–4 dias",
         "eyebrow": "NÃO DEIXE PARA DEPOIS",
         "title": "LICENCIAMENTO<br>EM DIA",
-        "body": "Circular tranquilo começa com a documentação certa. A gente resolve pra você em Cosmópolis.",
-        "cta": "WhatsApp 19 99185-1849",
+        "body": "Circular tranquilo começa com a documentação certa. Atendimento presencial + agilidade online.",
+        "cta": WA_LINE,
         "copy": (
             "Já pensou no licenciamento do seu veículo?\n"
-            "Não deixe para a última hora. No Despachante Sérgio Neto (Biju) a gente cuida da documentação com atendimento próximo em Cosmópolis.\n"
-            "📍 Av. Éster, 119 — Bela Vista III\n"
-            "📲 Chama no WhatsApp e tire sua dúvida."
+            "Não deixe para a última hora. No Despachante Sérgio Neto (Biju) a gente resolve com atendimento próximo.\n"
+            f"📍 {ADDR}\n"
+            "📲 WhatsApp: (19) 99185-1849 · (19) 99791-1339\n"
+            "📸 @despachante_sergioneto"
         ),
     },
     {
@@ -56,13 +63,14 @@ POSTS = [
         "eyebrow": "COMPROU OU VENDEU?",
         "title": "TRANSFERÊNCIA<br>SEM DOR DE CABEÇA",
         "body": "Negócio fechado só fica bom com a transferência certa. Orientamos os documentos e acompanhamos o processo.",
-        "cta": "Fale conosco no WhatsApp",
+        "cta": WA_LINE,
         "copy": (
             "Comprou ou vendeu um carro?\n"
             "A transferência precisa estar correta para não dar dor de cabeça depois.\n"
-            "Aqui orientamos os documentos certos e acompanhamos o processo.\n"
             "Despachante Sérgio Neto — Cosmópolis-SP\n"
-            "Fale conosco e resolva sem enrolação."
+            f"📍 {ADDR}\n"
+            "📲 WhatsApp: (19) 99185-1849 · (19) 99791-1339\n"
+            "📸 @despachante_sergioneto"
         ),
     },
     {
@@ -72,15 +80,17 @@ POSTS = [
         "eyebrow": "CHECKLIST RÁPIDO",
         "title": "DOCUMENTOS DA<br>TRANSFERÊNCIA",
         "body": "RG/CNH · CRLV · Comprovante de endereço · Recibo. Confirme a lista conosco antes de sair de casa.",
-        "cta": "Tire dúvida no WhatsApp",
+        "cta": WA_LINE,
         "copy": (
             "Documentos mais pedidos na transferência:\n"
             "✅ Documento do comprador e do vendedor\n"
             "✅ CRLV / documentação do veículo\n"
             "✅ Comprovante de endereço\n"
             "✅ Recibo de compra e venda preenchido\n"
-            "Lista pode variar — confirme conosco antes de ir ao cartório/DETRAN.\n"
-            "Despachante Sérgio Neto | Cosmópolis"
+            "Lista pode variar — confirme conosco antes.\n"
+            f"📍 {ADDR}\n"
+            "📲 WhatsApp: (19) 99185-1849 · (19) 99791-1339\n"
+            "📸 @despachante_sergioneto"
         ),
     },
 ]
@@ -158,19 +168,26 @@ def html_for(post: dict) -> str:
   .cta {{
     display: inline-flex; align-items: center; gap: 12px;
     background: #25d366; color: #062312;
-    font-weight: 800; font-size: 22px;
-    padding: 16px 24px; border-radius: 999px;
+    font-weight: 800; font-size: 20px;
+    padding: 14px 20px; border-radius: 999px;
     box-shadow: 0 10px 24px rgba(0,0,0,.35);
+    max-width: 640px;
   }}
   .wa {{
     width: 32px; height: 32px; border-radius: 50%;
     background: #062312; color: #25d366;
     display: grid; place-items: center; font-size: 16px; font-weight: 800;
+    flex-shrink: 0;
   }}
   .handle {{
-    text-align: right; font-size: 18px; font-weight: 700;
-    color: rgba(238,243,249,.75); letter-spacing: .03em;
+    text-align: right; font-size: 17px; font-weight: 700;
+    color: rgba(238,243,249,.8); letter-spacing: .03em;
     text-shadow: 0 2px 10px rgba(0,0,0,.5);
+    line-height: 1.35;
+  }}
+  .handle small {{
+    display: block; font-size: 14px; font-weight: 600;
+    color: rgba(238,243,249,.55); margin-top: 4px;
   }}
   .chip {{
     position: absolute; right: 52px; top: 210px;
@@ -195,7 +212,7 @@ def html_for(post: dict) -> str:
     <p class="body">{post['body']}</p>
     <div class="footer">
       <div class="cta"><span class="wa">W</span>{post['cta']}</div>
-      <div class="handle">@despachante_sergioneto</div>
+      <div class="handle">@despachante_sergioneto<small>Campo do Kigol</small></div>
     </div>
   </div>
 </body>
@@ -245,7 +262,8 @@ def build_docx(paths: list[tuple[dict, Path]]) -> Path:
     )
     r.italic = True
 
-    doc.add_paragraph("WhatsApp: (19) 99185-1849 · @despachante_sergioneto")
+    doc.add_paragraph("WhatsApp: (19) 99185-1849 · (19) 99791-1339")
+    doc.add_paragraph("Instagram: @despachante_sergioneto · Campo do Kigol, Cosmópolis-SP")
     doc.add_paragraph()
 
     for post, img in paths:

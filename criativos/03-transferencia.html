@@ -67,19 +67,26 @@
   .cta {
     display: inline-flex; align-items: center; gap: 12px;
     background: #25d366; color: #062312;
-    font-weight: 800; font-size: 22px;
-    padding: 16px 24px; border-radius: 999px;
+    font-weight: 800; font-size: 20px;
+    padding: 14px 20px; border-radius: 999px;
     box-shadow: 0 10px 24px rgba(0,0,0,.35);
+    max-width: 640px;
   }
   .wa {
     width: 32px; height: 32px; border-radius: 50%;
     background: #062312; color: #25d366;
     display: grid; place-items: center; font-size: 16px; font-weight: 800;
+    flex-shrink: 0;
   }
   .handle {
-    text-align: right; font-size: 18px; font-weight: 700;
-    color: rgba(238,243,249,.75); letter-spacing: .03em;
+    text-align: right; font-size: 17px; font-weight: 700;
+    color: rgba(238,243,249,.8); letter-spacing: .03em;
     text-shadow: 0 2px 10px rgba(0,0,0,.5);
+    line-height: 1.35;
+  }
+  .handle small {
+    display: block; font-size: 14px; font-weight: 600;
+    color: rgba(238,243,249,.55); margin-top: 4px;
   }
   .chip {
     position: absolute; right: 52px; top: 210px;
@@ -103,8 +110,8 @@
     <h1>TRANSFERÊNCIA<br>SEM DOR DE CABEÇA</h1>
     <p class="body">Negócio fechado só fica bom com a transferência certa. Orientamos os documentos e acompanhamos o processo.</p>
     <div class="footer">
-      <div class="cta"><span class="wa">W</span>Fale conosco no WhatsApp</div>
-      <div class="handle">@despachante_sergioneto</div>
+      <div class="cta"><span class="wa">W</span>19 99185-1849 · 19 99791-1339</div>
+      <div class="handle">@despachante_sergioneto<small>Campo do Kigol</small></div>
     </div>
   </div>
 </body>
